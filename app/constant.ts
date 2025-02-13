@@ -110,6 +110,7 @@ export const UNFINISHED_INPUT = (id: string) => "unfinished-input-" + id;
 export const STORAGE_KEY = "chatgpt-next-web";
 
 export const REQUEST_TIMEOUT_MS = 60000;
+export const REQUEST_TIMEOUT_MS_FOR_THINKING = REQUEST_TIMEOUT_MS * 5;
 
 export const EXPORT_MESSAGE_CLASS_NAME = "export-markdown";
 
@@ -257,6 +258,7 @@ export const ChatGLM = {
 export const SiliconFlow = {
   ExampleEndpoint: SILICONFLOW_BASE_URL,
   ChatPath: "v1/chat/completions",
+  ListModelPath: "v1/models?&sub_type=chat",
 };
 
 export const DEFAULT_INPUT_TEMPLATE = `{{input}}`; // input / time / model / lang
@@ -461,6 +463,7 @@ export const VISION_MODEL_REGEXES = [
   /gpt-4-turbo(?!.*preview)/, // Matches "gpt-4-turbo" but not "gpt-4-turbo-preview"
   /^dall-e-3$/, // Matches exactly "dall-e-3"
   /glm-4v/,
+  /vl/i,
 ];
 
 export const EXCLUDE_VISION_MODEL_REGEXES = [/claude-3-5-haiku-20241022/];
@@ -589,7 +592,16 @@ const iflytekModels = [
 
 const deepseekModels = ["deepseek-chat", "deepseek-coder", "deepseek-reasoner"];
 
-const xAIModes = ["grok-beta"];
+const xAIModes = [
+  "grok-beta",
+  "grok-2",
+  "grok-2-1212",
+  "grok-2-latest",
+  "grok-vision-beta",
+  "grok-2-vision-1212",
+  "grok-2-vision",
+  "grok-2-vision-latest",
+];
 
 const chatglmModels = [
   "glm-4-plus",

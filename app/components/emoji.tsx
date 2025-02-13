@@ -54,6 +54,8 @@ export function Avatar(props: { model?: ModelType; avatar?: string }) {
     if (
       modelName.startsWith("gpt") ||
       modelName.startsWith("chatgpt") ||
+      modelName.startsWith("dall-e") ||
+      modelName.startsWith("dalle") ||
       modelName.startsWith("o1") ||
       modelName.startsWith("o3")
     ) {
@@ -64,11 +66,11 @@ export function Avatar(props: { model?: ModelType; avatar?: string }) {
       LlmIcon = BotIconGemma;
     } else if (modelName.startsWith("claude")) {
       LlmIcon = BotIconClaude;
-    } else if (modelName.startsWith("llama")) {
+    } else if (modelName.toLowerCase().includes("llama")) {
       LlmIcon = BotIconMeta;
     } else if (modelName.startsWith("mixtral")) {
       LlmIcon = BotIconMistral;
-    } else if (modelName.startsWith("deepseek")) {
+    } else if (modelName.toLowerCase().includes("deepseek")) {
       LlmIcon = BotIconDeepseek;
     } else if (modelName.startsWith("moonshot")) {
       LlmIcon = BotIconMoonshot;
@@ -80,9 +82,13 @@ export function Avatar(props: { model?: ModelType; avatar?: string }) {
       LlmIcon = BotIconGrok;
     } else if (modelName.startsWith("hunyuan")) {
       LlmIcon = BotIconHunyuan;
-    } else if (modelName.startsWith("doubao")) {
+    } else if (modelName.startsWith("doubao") || modelName.startsWith("ep-")) {
       LlmIcon = BotIconDoubao;
-    } else if (modelName.startsWith("glm")) {
+    } else if (
+      modelName.toLowerCase().includes("glm") ||
+      modelName.startsWith("cogview-") ||
+      modelName.startsWith("cogvideox-")
+    ) {
       LlmIcon = BotIconChatglm;
     }
 

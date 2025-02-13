@@ -235,6 +235,7 @@ export function SideBar(props: { className?: string }) {
   const navigate = useNavigate();
   const config = useAppConfig();
   const chatStore = useChatStore();
+  const syncStore = useSyncStore();
   const [mcpEnabled, setMcpEnabled] = useState(false);
 
   useEffect(() => {
@@ -355,7 +356,7 @@ export function SideBar(props: { className?: string }) {
               icon={<SyncIcon />}
               onClick={async () => {
                 try {
-                  await useSyncStore().sync();
+                  await syncStore.sync();
                   showToast(Locale.Settings.Sync.Success);
                 } catch (e) {
                   showToast(Locale.Settings.Sync.Fail);
