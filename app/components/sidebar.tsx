@@ -12,6 +12,7 @@ import MaskIcon from "../icons/mask.svg";
 import McpIcon from "../icons/mcp.svg";
 import DragIcon from "../icons/drag.svg";
 import DiscoveryIcon from "../icons/discovery.svg";
+import SyncIcon from "../icons/cloud-sync.svg";
 
 import Locale from "../locales";
 
@@ -32,6 +33,9 @@ import dynamic from "next/dynamic";
 import { Selector, showConfirm } from "./ui-lib";
 import clsx from "clsx";
 import { isMcpEnabled } from "../mcp/actions";
+
+import { useSyncStore } from "../store/sync";
+import { showToast } from "./ui-lib";
 
 const DISCOVERY = [
   { name: Locale.Plugin.Name, path: Path.Plugins },
@@ -336,7 +340,7 @@ export function SideBar(props: { className?: string }) {
                 />
               </Link>
             </div>
-            <div className={styles["sidebar-action"]}>
+            {/* <div className={styles["sidebar-action"]}>
               <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
                 <IconButton
                   aria={Locale.Export.MessageFromChatGPT}
@@ -344,7 +348,22 @@ export function SideBar(props: { className?: string }) {
                   shadow
                 />
               </a>
-            </div>
+            </div> */}
+          <div className={styles["sidebar-action"]}>
+            <IconButton
+              aria={Locale.Settings.Sync.CloudState}
+              icon={<SyncIcon />}
+              onClick={async () => {
+                try {
+                  await useSyncStore().sync();
+                  showToast(Locale.Settings.Sync.Success);
+                } catch (e) {
+                  showToast(Locale.Settings.Sync.Fail);
+                  console.error("[Sync]", e);
+                }
+              }}
+            />
+          </div>
           </>
         }
         secondaryAction={
